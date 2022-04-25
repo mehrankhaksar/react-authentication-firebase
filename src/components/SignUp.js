@@ -50,7 +50,9 @@ const SignUp = () => {
         </form>
         <p className="text-center">
           Already have an account?{' '}
-          <Link className="font-semibold text-blue-500">Log In</Link>
+          <Link to="/" className="font-semibold text-blue-500">
+            Log In
+          </Link>
         </p>
       </div>
     </div>
