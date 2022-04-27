@@ -4,4 +4,4 @@
 
 ### Status
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/20f830ef-881d-484c-8c19-08ef63e3301c/deploy-status)](https://app.netlify.com/sites/mk-react-authentication-firebase/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3e5ab0cb-2a95-4670-a80e-fe856fa481f5/deploy-status)](https://app.netlify.com/sites/mk-react-authentication-firebase/deploys)
