@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContextProvider';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
+  const history = useHistory();
+
+  const { signUp } = useContext(AuthContext);
+
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -12,11 +18,21 @@ const SignUp = () => {
     setForm({ ...form, [id]: value });
   };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await signUp(form.email, form.password);
+      history.push('/');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="max-w-md mx-auto w-full space-y-6 py-10 px-5">
-        <h1 className="text-2xl font-semibold">Sign Up</h1>
-        <form className="w-full space-y-5">
+        <h1 className="text-3xl font-semibold">Sign Up</h1>
+        <form onSubmit={submitHandler} className="w-full space-y-5">
           <div className="w-full flex flex-col gap-2">
             <label htmlFor="email" className="text-lg font-medium">
               Email
