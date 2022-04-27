@@ -10,7 +10,14 @@ function App() {
   return (
     <AuthContextProvider>
       <Switch>
-        <PrivateRoute path="/home" component={Home} />
+        <Route
+          path="/home"
+          component={(props) => (
+            <PrivateRoute>
+              <Home {...props} />
+            </PrivateRoute>
+          )}
+        />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={LogIn} />
         <Redirect from="/" to="/login" />

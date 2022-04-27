@@ -1,8 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '../configs/fbConfig';
 
@@ -19,6 +20,10 @@ const AuthContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const logOut = () => {
+    return signOut(auth);
+  };
+
   useEffect(() => {
     const onsub = onAuthStateChanged(auth, (currentUser) => {
       setCurrentUser(currentUser);
@@ -30,7 +35,7 @@ const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, signUp, logIn }}>
+    <AuthContext.Provider value={{ currentUser, signUp, logIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );

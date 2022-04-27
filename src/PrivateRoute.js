@@ -1,27 +1,17 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContextProvider';
-import { Route } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
+const PrivateRoute = ({ children }) => {
+  const history = useHistory();
+
   const { currentUser } = useContext(AuthContext);
 
-  console.log(currentUser);
-
-  return (
-    <Route
-      {...rest}
-      render={(routeProps) =>
-        currentUser ? (
-          <RouteComponent {...routeProps} />
-        ) : (
-          <Redirect
-            to={{ pathname: '/login', state: { from: routeProps.location } }}
-          />
-        )
-      }
-    />
-  );
+  if (currentUser) {
+    return children;
+  } else {
+    return history.replace('/');
+  }
 };
 
 export default PrivateRoute;
