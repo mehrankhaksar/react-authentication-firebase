@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const SignUp = () => {
   const history = useHistory();
 
-  const { logIn } = useContext(AuthContext);
+  const { logIn, logInWithGoogle } = useContext(AuthContext);
 
   const [form, setForm] = useState({
     email: '',
@@ -22,6 +22,16 @@ const SignUp = () => {
     e.preventDefault();
     try {
       await logIn(form.email, form.password);
+      history.push('/home');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const logInWithGoogleHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await logInWithGoogle();
       history.push('/home');
     } catch (err) {
       alert(err.message);
@@ -71,6 +81,14 @@ const SignUp = () => {
               Sign Up
             </Link>
           </p>
+          <div className="w-full h-0.5 bg-black bg-opacity-20 rounded-sm"></div>
+          <button
+            className="flex items-center gap-2 text-white bg-blue-500 py-1.5 px-6 rounded"
+            onClick={logInWithGoogleHandler}
+          >
+            <i className="uil uil-google text-2xl"></i>
+            Sign In with Google
+          </button>
         </div>
       </div>
     </div>
